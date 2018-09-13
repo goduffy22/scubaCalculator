@@ -25,8 +25,8 @@ describe('scuba_calculator', function(){
         it('should return 21', function(){
             assert.equal(findPressureGroup(0,139), 21);
         });
-        it('should return 1000', function(){
-            assert.equal(findPressureGroup(0,205), 1000);
+        it('should return null', function(){
+            assert.equal(findPressureGroup(0,205), null);
         });
         it('should return 8', function(){
 

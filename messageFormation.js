@@ -1,4 +1,4 @@
-// TODO Do safetyStops need to be global???
+// Do safetyStops need to be global??? Answer: At the moment yes, used with calculate onclick fn
 var safetyStop1 = false;
 var safetyStop2 = false;
 var safetyStop3 = false;

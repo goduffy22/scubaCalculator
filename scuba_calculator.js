@@ -56,7 +56,7 @@ const table3 = [
     [3, 5, 6, 7, 8, 8, 9, 10]
 ];
 
-
+var noDecompLimit = false;
 
 //Later program this to take dive number as parameter so works for all dives
 
@@ -64,31 +64,31 @@ const table3 = [
 function findPressureGroup(depth, time){
     let depthArray = table1[depth];
     let length = depthArray.length;
-    let pressureGroup;
+    let group = null;
     if (time <= depthArray[0]){
-        pressureGroup = 0;
+        group = 0;
     } else if(time >= depthArray[length - 1]){
-        pressureGroup = 1000;
+        noDecompLimit = true;
     } else {
         for(let i = 0; i < length-1; i++) {
             if ((depthArray[i] < time) && (time <= depthArray[i + 1])) {
-                pressureGroup = i + 1;
+                group = i + 1;
             }
         }
     }
-    return pressureGroup;
+    return group;
 }
 
-function safetyStopCheck (pressureGroup, depth){
+function safetyStopCheck (group, depth){
     let depthArray = table1[depth];
     let length = depthArray.length;
     let stop;
-    if(pressureGroup === length - 1){
+    if(group === length - 1){
         stop = false; //But must catch black square elsewhere
     } else if (depth > 6){
         stop = true;
     } else {
-        stop = ((length - 4 <= pressureGroup) && (pressureGroup <= length - 2)); //Needs &&, don't always listen to the editor
+        stop = ((length - 4 <= group) && (group <= length - 2)); //Needs &&, don't always listen to the editor
     }
     //Test this, does it need &&???
     return stop;
@@ -114,9 +114,9 @@ function findNewPressureGroup(oldGroup, surfaceInterval){
     return newGroup;
 }
 
-function findRNT(pressureGroup, depthLevel){
+function findRNT(group, depthLevel){
     const array = table3[depthLevel];
-    const RNT = array[pressureGroup];
+    const RNT = array[group];
     return RNT;
 }
 

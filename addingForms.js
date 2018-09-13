@@ -49,13 +49,6 @@ function addForm(formNumber){
     let btnName = "add" + formNumber;
     let add = document.getElementById(btnName);
 
-    // add.onclick = function(){
-    //     addForm(formNumber + 1);
-    //   return false;
-    //};
-
-    //At this point it's time try with react.js
-
     add.addEventListener("click", function(){
         addForm(formNumber + 1);
     },
@@ -86,15 +79,24 @@ function getInputDiveNum(i) {
 }
 
 document.getElementById("calculate").onclick = function() {
-    let msg = formMessageDive1();
+    let msg1 = formMessageDive1();
     let className = "alert-success";
     if(safetyStop1){
         className = "alert-warning";
     }
     const html = '<div class="alert ' + className + ' mt-3" role="alert">' +
-                        msg +
+                        msg1 +
                 '</div>';
-    addElement("infoDive1", "div", "infoDive1", html);
+    addElement("infoDive", "div", "alertContainer1", html);
+
+    let msg2 = formMessageDiveNum(2);
+    if(safetyStop2){
+        className = "alert-warning";
+    }
+    const html2 = '<div class="alert ' + className + ' mt-3" role="alert">' +
+        msg2 +
+        '</div>';
+    addElement("infoDive", "div", "alertContainer2", html2);
 };
 
 function addElement(parentId, elementTag, elementId, html){
