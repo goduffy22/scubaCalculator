@@ -54,6 +54,8 @@ const table3 = [
     [3, 5, 6, 7, 8, 8, 9, 10]
 ];
 
+var safetyStop1 = false;
+
 //Later program this to take dive number as parameter so works for all dives
 function getInputDive1() {
     const list = document.getElementById("depthList1");
@@ -84,7 +86,14 @@ function safetyStopCheck (pressureGroup, depth){
     let depthArray = table1[depth];
     let length = depthArray.length;
     let stop;
-    stop = length - 4 <= pressureGroup <= length - 2; //Test this, does it need &&???
+    if(pressureGroup === length - 1){
+        stop = false; //But must catch black square elsewhere
+    } else if (depth > 6){
+        stop = true;
+    } else {
+        stop = ((length - 4 <= pressureGroup) && (pressureGroup <= length - 2)); //Needs &&, don't always listen to the editor
+    }
+    //Test this, does it need &&???
     return stop;
 }
 
@@ -118,26 +127,23 @@ function findRNT(pressureGroup, depthLevel){
 }
 
 function formMessageDive1(){
-    let msg;
+    let msg = "Dive 1<br>";
     let inputs = getInputDive1();
     let depth = parseInt(inputs[0]);
     let time = parseInt(inputs[1]);
     let group = findPressureGroup(depth, time);
-    let safety = safetyStopCheck(group, depth);
+    safetyStop1 = safetyStopCheck(group, depth);
 
-    if (safety){
-        msg += "WARNING: You will need a 3 minute safety stop at 15 feet";
+    if (safetyStop1){
+        msg += "WARNING: You will need a 3 minute safety stop at 15 feet<br>";
     }
-    msg += "\n Your pressure group straight after this dive will be: " + pressureIndexToLetter(group);
-    msg += "\n Enjoy your first dive!";
+    msg += "Your pressure group straight after this dive will be:   " + pressureIndexToLetter(group);
+    msg += "<br>Enjoy your first dive!";
 
     return msg;
 }
 
-document.getElementById("calculate").onclick = function() {
-    let msg = formMessageDive1();
-    document.getElementById("messageDisplay").innerHTML = msg;
-};
+
 
 
 function pressureIndexToLetter(index){

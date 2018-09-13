@@ -60,8 +60,19 @@ function addForm(formNumber){
         addForm(formNumber + 1);
     },
         true); //3rd dive added but then refreshes straight away (tried bubbling and trickling
-
 }
+
+document.getElementById("calculate").onclick = function() {
+    let msg = formMessageDive1();
+    let className = "alert-success";
+    if(safetyStop1){
+        className = "alert-warning";
+    }
+    const html = '<div class="alert ' + className + ' mt-3" role="alert">' +
+                        msg +
+                '</div>';
+    addElement("infoDive1", "div", "infoDive1", html);
+};
 
 function addElement(parentId, elementTag, elementId, html){
     var p = document.getElementById(parentId);
