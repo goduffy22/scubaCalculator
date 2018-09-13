@@ -11,41 +11,7 @@ const table1 = [
     [3, 5, 6, 7, 8, 9, 10, 11, 0, 12, 13],
     [3, 5, 6, 7, 0, 8, 9, 10],
     [0, 4, 5, 6, 7, 8],
-    ];
-
-
-function getInputs() {
-    const list = document.getElementById("depthList");
-    const depthLevel = list.options[list.selectedIndex].value;
-    const time = document.getElementById("diveTime").value;
-    return [depthLevel, time];
-}
-
-function findPressureGroup(depth, time){
-    let depthArray = table1[depth];
-    let length = depthArray.length;
-    let pressureGroup;
-    if (time <= depthArray[0]){
-        pressureGroup = 0;
-    } else if(time >= depthArray[length - 1]){
-        pressureGroup = 1000;
-    } else {
-        for(let i = 0; i < length-1; i++) {
-            if ((depthArray[i] < time) && (time <= depthArray[i + 1])) {
-                pressureGroup = i + 1;
-            }
-        }
-    }
-    return pressureGroup;
-}
-
-function safetyStopCheck (pressureGroup, depth){
-    let depthArray = table1[depth];
-    let length = depthArray.length;
-    let stop;
-    stop = length - 4 <= pressureGroup <= length - 2; //Test this, does it need &&???
-    return stop;
-}
+];
 
 const table2 = [
     [180],
@@ -75,6 +41,55 @@ const table2 = [
     [360, 299, 131, 109, 100, 91, 84, 77, 71, 65, 59, 54, 49, 44, 40, 35, 31, 28, 24, 20, 17, 14, 11, 8, 5, 2]
 ];
 
+const table3 = [
+    [10, 19, 25, 29, 32, 36, 40, 44, 48, 52, 57, 62, 67, 73, 79, 85, 92, 100, 108, 117, 127, 139, 152, 168, 188, 205],
+    [9, 16, 22, 25, 27, 31, 34, 37, 40, 44, 48, 51, 55, 60, 64, 69, 74, 79, 85, 91, 97, 104, 111, 120, 129, 140],
+    [7, 13, 17, 19, 21, 24, 26, 28, 31, 33, 36, 38, 41, 44, 47, 50, 53, 57, 60, 63, 67, 71, 75, 80],
+    [6, 11, 14, 16, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 42, 44, 47, 49, 52, 54, 55],
+    [5, 9, 12, 13, 15, 16, 18, 19, 21, 22, 24, 26, 27, 29, 31, 33, 34, 36, 38, 40],
+    [4, 8, 10, 11, 13, 14, 15, 17, 18, 19, 21, 22, 23, 25, 26, 28, 29, 30],
+    [4, 7, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25],
+    [3, 6, 8, 9, 10, 11, 12, 13, 14, 14, 15, 16],
+    [3, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13],
+    [3, 5, 6, 7, 8, 8, 9, 10]
+];
+
+//Later program this to take dive number as parameter so works for all dives
+function getInputDive1() {
+    const list = document.getElementById("depthList1");
+    const depthLevel = list.options[list.selectedIndex].value;
+    const time = document.getElementById("diveTime1").value;
+    return [depthLevel, time];
+}
+
+function findPressureGroup(depth, time){
+    let depthArray = table1[depth];
+    let length = depthArray.length;
+    let pressureGroup;
+    if (time <= depthArray[0]){
+        pressureGroup = 0;
+    } else if(time >= depthArray[length - 1]){
+        pressureGroup = 1000;
+    } else {
+        for(let i = 0; i < length-1; i++) {
+            if ((depthArray[i] < time) && (time <= depthArray[i + 1])) {
+                pressureGroup = i + 1;
+            }
+        }
+    }
+    return pressureGroup;
+}
+
+function safetyStopCheck (pressureGroup, depth){
+    let depthArray = table1[depth];
+    let length = depthArray.length;
+    let stop;
+    stop = length - 4 <= pressureGroup <= length - 2; //Test this, does it need &&???
+    return stop;
+}
+
+
+
 function findNewPressureGroup(oldGroup, surfaceInterval){
     const timeIntervals = table2[oldGroup];
     const length = timeIntervals.length;
@@ -94,18 +109,7 @@ function findNewPressureGroup(oldGroup, surfaceInterval){
     return newGroup;
 }
 
-table3 = [
-    [10, 19, 25, 29, 32, 36, 40, 44, 48, 52, 57, 62, 67, 73, 79, 85, 92, 100, 108, 117, 127, 139, 152, 168, 188, 205],
-    [9, 16, 22, 25, 27, 31, 34, 37, 40, 44, 48, 51, 55, 60, 64, 69, 74, 79, 85, 91, 97, 104, 111, 120, 129, 140],
-    [7, 13, 17, 19, 21, 24, 26, 28, 31, 33, 36, 38, 41, 44, 47, 50, 53, 57, 60, 63, 67, 71, 75, 80],
-    [6, 11, 14, 16, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 42, 44, 47, 49, 52, 54, 55],
-    [5, 9, 12, 13, 15, 16, 18, 19, 21, 22, 24, 26, 27, 29, 31, 33, 34, 36, 38, 40],
-    [4, 8, 10, 11, 13, 14, 15, 17, 18, 19, 21, 22, 23, 25, 26, 28, 29, 30],
-    [4, 7, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25],
-    [3, 6, 8, 9, 10, 11, 12, 13, 14, 14, 15, 16],
-    [3, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13],
-    [3, 5, 6, 7, 8, 8, 9, 10]
-];
+
 
 function findRNT(pressureGroup, depthLevel){
     const array = table3[depthLevel];
@@ -113,46 +117,30 @@ function findRNT(pressureGroup, depthLevel){
     return RNT;
 }
 
-document.getElementById("calculate").onclick = function(){
+function formMessageDive1(){
     let msg;
-    let inputs = getInputs();
+    let inputs = getInputDive1();
     let depth = parseInt(inputs[0]);
     let time = parseInt(inputs[1]);
-
     let group = findPressureGroup(depth, time);
-    msg = "Group: " + group;
-
     let safety = safetyStopCheck(group, depth);
 
     if (safety){
-        msg += " You will need a 3 minute safety stop at 15 feet";
+        msg += "WARNING: You will need a 3 minute safety stop at 15 feet";
     }
+    msg += "\n Your pressure group straight after this dive will be: " + pressureIndexToLetter(group);
+    msg += "\n Enjoy your first dive!";
 
-    let newGroup = findNewPressureGroup(group, 60);
-    msg += " \n New pressure group is: " + newGroup;
-//working up to here
-    let secondDepth = 4;
-    let RNT = findRNT(newGroup, secondDepth);
-
-    msg += " RNT is: " + RNT;
-
-
-
-
-    document.getElementById("output").innerHTML = msg;
-    //return false;
-};
-
-function test() {
-    let inputs = getInputs();
-    let depth = parseInt(inputs[0]);
-    let time = parseInt(inputs[1]);
-
-    let group = findPressureGroup(depth, time);
-    document.getElementById("output").innerHTML = group.toString();
-    return group;
+    return msg;
 }
 
+document.getElementById("calculate").onclick = function() {
+    let msg = formMessageDive1();
+    document.getElementById("messageDisplay").innerHTML = msg;
+};
 
 
-const html = '<div className="card-deck text-center m-2">
+function pressureIndexToLetter(index){
+    const letter = String.fromCharCode(65 + index);
+    return letter;
+}
