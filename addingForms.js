@@ -3,7 +3,7 @@
 function addForm(formNumber){
     let html =
 '<div class="input-group mb-3">' +
-        '<select class="custom-select">' +
+        '<select class="custom-select" id="intervalHours' + formNumber + '">' +
             '<option value="0" selected>0</option>' +
             '<option value="1">1</option>' +
             '<option value="2">2</option>' +
@@ -16,13 +16,13 @@ function addForm(formNumber){
         '<div class="input-group-append">' +
             '<label class="input-group-text">Hour(s)</label>' +
         '</div>' +
-        '<input type="number" min="0" max="59">' +
+        '<input type="number" min="0" max="59" id="intervalMinutes' + formNumber + '">' +
         '<div class="input-group-append">' +
             '<label class="input-group-text">Minute(s)</label>' +
         '</div>' +
 '</div> ' +
         '<div class="input-group mb-3"> ' +
-            '<select class="custom-select">' +
+            '<select class="custom-select" id="depthList' + formNumber + '">' +
                 '<option selected>Choose...</option>' +
                 '<option value="0">35</option>' +
                 '<option value="1">40</option>\n' +
@@ -38,7 +38,7 @@ function addForm(formNumber){
             '</select>' +
         '</div> ' +
         '<div class="input-group mb-3">' +
-            '<input type="number" class="input-group-text">' +
+            '<input type="number" class="input-group-text" id="diveTime' + formNumber + '">' +
         '</div>' +
         '<button type="button" class="btn btn-outline-dark" id="' +
                 'add' + formNumber +
@@ -60,6 +60,29 @@ function addForm(formNumber){
         addForm(formNumber + 1);
     },
         true); //3rd dive added but then refreshes straight away (tried bubbling and trickling
+}
+
+function getInputDive1() {
+    const list = document.getElementById("depthList1");
+    const depthLevel = parseInt(list.options[list.selectedIndex].value);
+    const time = parseInt(document.getElementById("diveTime1").value);
+    return [depthLevel, time];
+}
+
+function getInputDiveNum(i) {
+    const depthList = "depthList" + i;
+    const diveTime = "diveTime" + i;
+    const intervalHours = "intervalHours" + i;
+    const intervalMinutes = "intervalMinutes" + i;
+
+    const hours = parseInt(document.getElementById(intervalHours).value);
+    const minutes = parseInt(document.getElementById(intervalMinutes).value);
+    const intervalTime = hours * 60 + minutes;
+
+    const list = document.getElementById(depthList);
+    const depthLevel = parseInt(list.options[list.selectedIndex].value);
+    const time = parseInt(document.getElementById(diveTime).value);
+    return [intervalTime, depthLevel, time];
 }
 
 document.getElementById("calculate").onclick = function() {

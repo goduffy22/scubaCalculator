@@ -76,22 +76,44 @@ describe('scuba_calculator', function(){
     });
 
     describe('findNewPressureGroup', function(){
-
+        it("should be 0", function(){
+            assert.equal(findNewPressureGroup(0, 100), 0);
+        });
+        it("should be 3", function(){
+            assert.equal(findNewPressureGroup(7, 33), 3);
+        });
+        it("should be 17", function(){
+            assert.equal(findNewPressureGroup(17, 3), 17);
+        });
+        it("should be 22", function(){
+            assert.equal(findNewPressureGroup(25, 10), 22);
+        });
+        it("should be null", function(){
+            assert.equal(findNewPressureGroup(24, 360), null);
+        });
     });
 
     describe('findRNT', function(){
-
+        it('should be 3', function () {
+            assert.equal(findRNT(0, 10), 3);
+        });
+        it('should be 17', function () {
+            assert.equal(findRNT(9, 6), 17);
+        });
+        it('should be 20', function () {
+            assert.equal(findRNT(14, 7), 20);
+        });
+        it('should be 108', function () {
+            assert.equal(findRNT(18, 0), 108);
+        });
+        it('should be 140', function () {
+            assert.equal(findRNT(25, 1), 140);
+        });
+        it('should be undefined', function () {
+            assert.equal(findRNT(22, 4), undefined);
+        });
     });
 
-    describe('pressureIndexToLetter', function(){
-        it('should be A', function(){
-            assert.equal(pressureIndexToLetter(0), "A");
-        });
-        it('should be Z', function(){
-            assert.equal(pressureIndexToLetter(25), "Z");
-        });
-
-    })
 
 
 });

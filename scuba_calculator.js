@@ -19,6 +19,7 @@ const table2 = [
     [250, 69, 21],
     [259, 78, 30, 8],
     [268, 87, 38, 16, 7],
+    [275, 94, 46, 24, 15, 7],
     [282, 101, 53, 31, 22, 13, 6],
     [288, 107, 59, 37, 28, 20, 12, 5],
     [294, 113, 65, 43, 34, 26, 18, 11, 5],
@@ -49,20 +50,16 @@ const table3 = [
     [5, 9, 12, 13, 15, 16, 18, 19, 21, 22, 24, 26, 27, 29, 31, 33, 34, 36, 38, 40],
     [4, 8, 10, 11, 13, 14, 15, 17, 18, 19, 21, 22, 23, 25, 26, 28, 29, 30],
     [4, 7, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25],
+    [3, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
     [3, 6, 8, 9, 10, 11, 12, 13, 14, 14, 15, 16],
     [3, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13],
     [3, 5, 6, 7, 8, 8, 9, 10]
 ];
 
-var safetyStop1 = false;
+
 
 //Later program this to take dive number as parameter so works for all dives
-function getInputDive1() {
-    const list = document.getElementById("depthList1");
-    const depthLevel = list.options[list.selectedIndex].value;
-    const time = document.getElementById("diveTime1").value;
-    return [depthLevel, time];
-}
+
 
 function findPressureGroup(depth, time){
     let depthArray = table1[depth];
@@ -97,28 +94,25 @@ function safetyStopCheck (pressureGroup, depth){
     return stop;
 }
 
-
-
 function findNewPressureGroup(oldGroup, surfaceInterval){
     const timeIntervals = table2[oldGroup];
     const length = timeIntervals.length;
     let newGroup;
     if(surfaceInterval > timeIntervals[0]){
         newGroup = null;
-    } else if (surfaceInterval < timeIntervals[length - 1]) {
+    } else if (surfaceInterval <= timeIntervals[length - 1]) {
         newGroup = oldGroup;
     }
     else {
         for (let i = 0; i < length - 1; i++){
-            if (timeIntervals[i+1] < surfaceInterval < timeIntervals[i]){
+            if ((timeIntervals[i+1] < surfaceInterval) && (surfaceInterval <= timeIntervals[i])){
                 newGroup = i;
+                return newGroup;
                 }
         }
     }
     return newGroup;
 }
-
-
 
 function findRNT(pressureGroup, depthLevel){
     const array = table3[depthLevel];
@@ -126,27 +120,3 @@ function findRNT(pressureGroup, depthLevel){
     return RNT;
 }
 
-function formMessageDive1(){
-    let msg = "Dive 1<br>";
-    let inputs = getInputDive1();
-    let depth = parseInt(inputs[0]);
-    let time = parseInt(inputs[1]);
-    let group = findPressureGroup(depth, time);
-    safetyStop1 = safetyStopCheck(group, depth);
-
-    if (safetyStop1){
-        msg += "WARNING: You will need a 3 minute safety stop at 15 feet<br>";
-    }
-    msg += "Your pressure group straight after this dive will be:   " + pressureIndexToLetter(group);
-    msg += "<br>Enjoy your first dive!";
-
-    return msg;
-}
-
-
-
-
-function pressureIndexToLetter(index){
-    const letter = String.fromCharCode(65 + index);
-    return letter;
-}
