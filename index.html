@@ -12,12 +12,17 @@
 <div class="row" id="divesBar">
 
 
-    <div class="card-deck text-center m-2">
+    <div class="card-deck text-center mt-2 ml-1 col-3">
         <div class="card">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Dive 1</h4>
+            </div>
             <div class="card-body">
                 <form id="form1">
+                    <label for="depthList1">Depth (ft):</label>
                     <div class="input-group mb-3">
-                        <select class="custom-select" id="depthList">
+
+                        <select class="custom-select" id="depthList1">
                             <option selected>Choose...</option>
                             <option value="0">35</option>
                             <option value="1">40</option>
@@ -33,36 +38,66 @@
                             <option value="11">140</option>
                         </select>
                     </div>
+                    <label for="diveTime">Dive time (mins)</label>
                     <div class="input-group mb-3">
                         <input type="number" class="input-group-text" id="diveTime">
                     </div>
-                    <button id="add1" class="btn btn-outline-dark addForm" type="button">Add Next Dive</button>
+                    <button id="add1" class="mt-auto btn btn-outline-dark addForm " type="button">Add Next Dive</button>
                 </form>
             </div>
         </div>
     </div>
 
+    <div class="card-deck text-center mt-2 ml-1 col-3">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Dive 2</h4>
+            </div>
+            <div class="card-body">
 
     <form id="form2">
 
     </form>
+            </div>
+        </div>
+    </div>
 
-    <form id="form3">
+    <div class="card-deck text-center mt-2 ml-1 col-3">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Dive 3</h4>
+            </div>
+            <div class="card-body">
 
-    </form>
+                <form id="form3">
 
-    <form class="form4">
+                </form>
+            </div>
+        </div>
+    </div>
 
-    </form>
+    <div class="card-deck text-center mt-2 ml-1 col-3">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Dive 4</h4>
+            </div>
+            <div class="card-body">
+
+                <form id="form4">
+
+                </form>
+            </div>
+        </div>
+    </div>
 
 </div>
 <div class="input-group mb-3">
-    <button class="btn btn-primary mb-3" id="calculate" type="button">Calculate</button>
+    <button class="btn btn-primary mt-3 ml-3" id="calculate" type="button">Calculate</button>
 </div>
 
 
 <div>
-    <p id="output"></p>
+
 </div>
 
 

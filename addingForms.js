@@ -1,11 +1,10 @@
 //TODO Redo this using React.js: Good demo for why React is so useful though!
 
 function addForm(formNumber){
-    let html = '' +
+    let html =
 '<div class="input-group mb-3">' +
         '<select class="custom-select">' +
-            '<option value="0" selected>Choose...</option>' +
-            '<option value="0">0</option>' +
+            '<option value="0" selected>0</option>' +
             '<option value="1">1</option>' +
             '<option value="2">2</option>' +
             '<option value="3">3</option>' +
