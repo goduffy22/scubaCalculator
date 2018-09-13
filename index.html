@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.css">
+    <link rel="stylesheet" href="style_index.css">
+
+    <title>Title</title>
+</head>
+<body>
+<div class="row" id="divesBar">
+
+
+    <div class="card-deck text-center m-2">
+        <div class="card">
+            <div class="card-body">
+                <form id="form1">
+                    <div class="input-group mb-3">
+                        <select class="custom-select" id="depthList">
+                            <option selected>Choose...</option>
+                            <option value="0">35</option>
+                            <option value="1">40</option>
+                            <option value="2">50</option>
+                            <option value="3">60</option>
+                            <option value="4">70</option>
+                            <option value="5">80</option>
+                            <option value="6">90</option>
+                            <option value="7">100</option>
+                            <option value="8">110</option>
+                            <option value="9">120</option>
+                            <option value="10">130</option>
+                            <option value="11">140</option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="number" class="input-group-text" id="diveTime">
+                    </div>
+                    <button id="add1" class="btn btn-outline-dark addForm" type="button">Add Next Dive</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <form id="form2">
+
+    </form>
+
+    <form id="form3">
+
+    </form>
+
+    <form class="form4">
+
+    </form>
+
+</div>
+<div class="input-group mb-3">
+    <button class="btn btn-primary mb-3" id="calculate" type="button">Calculate</button>
+</div>
+
+
+<div>
+    <p id="output"></p>
+</div>
+
+
+
+
+<script src="js/bootstrap.js"></script>
+<script src="scuba_calculator.js"></script>
+<script src="addingForms.js"></script>
+
+</body>
+</html>
