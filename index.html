@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-grid.css">
-    <link rel="stylesheet" href="style_index.css">
+    <link rel="stylesheet" href="css/style_index.css">
 
     <title>Title</title>
 </head>
@@ -19,10 +19,10 @@
             </div>
             <div class="card-body">
                 <form id="form1">
-                    <label for="depthList1">Depth (ft):</label>
+                    <label>Max. Depth (ft) of Dive:</label>
                     <div class="input-group mb-3">
 
-                        <select class="custom-select" id="depthList1">
+                        <select class="custom-select"  style="text-align-last: center" id="depthList1">
                             <option selected>Choose...</option>
                             <option value="0">35</option>
                             <option value="1">40</option>
@@ -38,9 +38,9 @@
                             <option value="11">140</option>
                         </select>
                     </div>
-                    <label for="diveTime">Dive time (mins)</label>
+                    <label>Dive time (mins)</label>
                     <div class="input-group mb-3">
-                        <input type="number" class="input-group-text" id="diveTime1">
+                        <input type="number" min=0 class="input-group text-center" id="diveTime1">
                     </div>
                     <button id="add1" class="mt-auto btn btn-outline-dark addForm " type="button">Add Next Dive</button>
                 </form>
@@ -104,9 +104,9 @@
 
 
 <script src="js/bootstrap.js"></script>
-<script src="scuba_calculator.js"></script>
-<script src="addingForms.js"></script>
-<script src="messageFormation.js"></script>
+<script src="js/scuba_calculator.js"></script>
+<script src="js/addingForms.js"></script>
+<script src="js/messageFormation.js"></script>
 
 </body>
 </html>

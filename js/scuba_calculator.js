@@ -67,7 +67,7 @@ function findPressureGroup(depth, time){
     let group = null;
     if (time <= depthArray[0]){
         group = 0;
-    } else if(time >= depthArray[length - 1]){
+    } else if(time > depthArray[(length - 2)]){
         noDecompLimit = true;
     } else {
         for(let i = 0; i < length-1; i++) {

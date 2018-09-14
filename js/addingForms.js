@@ -2,6 +2,7 @@
 
 function addForm(formNumber){
     let html =
+        '<label>Surface Interval Time:</label>' +
 '<div class="input-group mb-3">' +
         '<select class="custom-select" id="intervalHours' + formNumber + '">' +
             '<option value="0" selected>0</option>' +
@@ -10,8 +11,7 @@ function addForm(formNumber){
             '<option value="3">3</option>' +
             '<option value="4">4</option>' +
             '<option value="5">5</option>' +
-            '<option value="6">6</option>' +
-            '<option value="7">7</option>' +
+            '<option value="6">6 +</option>' +
         '</select>' +
         '<div class="input-group-append">' +
             '<label class="input-group-text">Hour(s)</label>' +
@@ -21,8 +21,9 @@ function addForm(formNumber){
             '<label class="input-group-text">Minute(s)</label>' +
         '</div>' +
 '</div> ' +
+        '<label>Max. Depth (ft) of Dive</label>' +
         '<div class="input-group mb-3"> ' +
-            '<select class="custom-select" id="depthList' + formNumber + '">' +
+            '<select class="custom-select" style="text-align-last: center" id="depthList' + formNumber + '">' +
                 '<option selected>Choose...</option>' +
                 '<option value="0">35</option>' +
                 '<option value="1">40</option>\n' +
@@ -37,8 +38,9 @@ function addForm(formNumber){
                 '<option value="10">130</option>\n' +
             '</select>' +
         '</div> ' +
+        '<label>Dive Time (mins)</label>' +
         '<div class="input-group mb-3">' +
-            '<input type="number" class="input-group-text" id="diveTime' + formNumber + '">' +
+            '<input type="number" min=0 class="input-group text-center" id="diveTime' + formNumber + '">' +
         '</div>' +
         '<button type="button" class="btn btn-outline-dark" id="' +
                 'add' + formNumber +
@@ -79,18 +81,32 @@ function getInputDiveNum(i) {
 }
 
 document.getElementById("calculate").onclick = function() {
+    noDecompLimit = false; //reset when recalculate TODO make reset button/function
     let msg1 = formMessageDive1();
     let className = "alert-success";
-    if(safetyStop1){
+    if (noDecompLimit){
+        className = "alert-danger";
+    }
+    else if (safetyStop1){
         className = "alert-warning";
     }
+
     const html = '<div class="alert ' + className + ' mt-3" role="alert">' +
                         msg1 +
                 '</div>';
     addElement("infoDive", "div", "alertContainer1", html);
 
+    if (noDecompLimit){
+        return ;
+    }
+    className = "alert-success";
+
+
     let msg2 = formMessageDiveNum(2);
-    if(safetyStop2){
+    if(noDecompLimit){
+        className = "alert-danger";
+    }
+    else if(safetyStop2){
         className = "alert-warning";
     }
     const html2 = '<div class="alert ' + className + ' mt-3" role="alert">' +
