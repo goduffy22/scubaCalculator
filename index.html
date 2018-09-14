@@ -19,8 +19,9 @@
             </div>
             <div class="card-body">
                 <form id="form1">
+                    <label for="depthList1">Max. Depth (ft) of Dive:</label>
                     <div class="input-group mb-3">
-                        <label for="depthList1">Max. Depth (ft) of Dive:</label>
+
                         <select class="custom-select"  style="text-align-last: center" id="depthList1">
                             <option selected>Choose...</option>
                             <option value="0">35</option>
@@ -37,9 +38,8 @@
                             <option value="11">140</option>
                         </select>
                     </div>
-                    <label>Dive time (mins)</label>
+                    <label for="diveTime1">Dive time (mins)</label>
                     <div class="input-group mb-3">
-                        <label for="diveTime1">Max. Depth (ft) of Dive:</label>
                         <input type="number" min=0 class="input-group text-center" id="diveTime1">
                     </div>
                     <button id="add1" class="mt-auto btn btn-outline-dark addForm " type="button">Add Next Dive</button>
@@ -54,7 +54,6 @@
                 <h4 class="my-0 font-weight-normal">Dive 2</h4>
             </div>
             <div class="card-body">
-
     <form id="form2">
 
     </form>
@@ -93,6 +92,7 @@
 </div>
 <div class="input-group mb-3">
     <button class="btn btn-primary mt-3 ml-3" id="calculate" type="button">Calculate</button>
+    <button class="btn btn-dark mt-3 ml-3" id="resetAll">Reset All</button>
 </div>
 
 

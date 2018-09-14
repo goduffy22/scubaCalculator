@@ -2,7 +2,7 @@
 
 function addForm(formNumber){
     let html =
-        '<label>Surface Interval Time:</label>' +
+        '<label for="intervalHours' + formNumber + '">Surface Interval Time:</label>' +
 '<div class="input-group mb-3">' +
         '<select class="custom-select" id="intervalHours' + formNumber + '">' +
             '<option value="0" selected>0</option>' +
@@ -14,14 +14,14 @@ function addForm(formNumber){
             '<option value="6">6 +</option>' +
         '</select>' +
         '<div class="input-group-append">' +
-            '<label class="input-group-text">Hour(s)</label>' +
+            '<span class="input-group-text">Hour(s)</span>' +
         '</div>' +
         '<input type="number" min="0" max="59" id="intervalMinutes' + formNumber + '">' +
         '<div class="input-group-append">' +
-            '<label class="input-group-text">Minute(s)</label>' +
+            '<span class="input-group-text">Minute(s)</span>' +
         '</div>' +
-'</div> ' +
-        '<label>Max. Depth (ft) of Dive</label>' +
+        '</div>' +
+        '<label for="depthList' + formNumber + '">Max. Depth (ft) of Dive</label>' +
         '<div class="input-group mb-3"> ' +
             '<select class="custom-select" style="text-align-last: center" id="depthList' + formNumber + '">' +
                 '<option selected>Choose...</option>' +
@@ -38,7 +38,7 @@ function addForm(formNumber){
                 '<option value="10">130</option>\n' +
             '</select>' +
         '</div> ' +
-        '<label>Dive Time (mins)</label>' +
+        '<label for="diveTime' + formNumber + '">Dive Time (mins)</label>' +
         '<div class="input-group mb-3">' +
             '<input type="number" min=0 class="input-group text-center" id="diveTime' + formNumber + '">' +
         '</div>' +
@@ -54,7 +54,7 @@ function addForm(formNumber){
     add.addEventListener("click", function(){
         addForm(formNumber + 1);
     },
-        true); //3rd dive added but then refreshes straight away (tried bubbling and trickling
+        true);
 }
 
 const add1 = document.getElementById("add1");
@@ -115,7 +115,18 @@ function addElement(parentId, elementTag, elementId, html){
 }
 
 document.getElementById("calculate").onclick = function() {
-    const group =  renderAlert(1, null);
-    renderAlert(2, group);
+    const infoDive = document.getElementById("infoDive");
+    while (infoDive.firstChild) {
+        infoDive.removeChild(infoDive.firstChild);
+    }
+    let group =  renderAlert(1, null); //TODO Make into loop  (could do for infinite element but better in react), sort out black box case
+    group = renderAlert(2, group);
+    group = renderAlert(3, group);
+    renderAlert(4, group);
+
+};
+
+document.getElementById("resetAll").onclick = function() {
+    window.location.reload();
 };
 
