@@ -19,9 +19,8 @@
             </div>
             <div class="card-body">
                 <form id="form1">
-                    <label>Max. Depth (ft) of Dive:</label>
                     <div class="input-group mb-3">
-
+                        <label for="depthList1">Max. Depth (ft) of Dive:</label>
                         <select class="custom-select"  style="text-align-last: center" id="depthList1">
                             <option selected>Choose...</option>
                             <option value="0">35</option>
@@ -40,6 +39,7 @@
                     </div>
                     <label>Dive time (mins)</label>
                     <div class="input-group mb-3">
+                        <label for="diveTime1">Max. Depth (ft) of Dive:</label>
                         <input type="number" min=0 class="input-group text-center" id="diveTime1">
                     </div>
                     <button id="add1" class="mt-auto btn btn-outline-dark addForm " type="button">Add Next Dive</button>
@@ -104,9 +104,9 @@
 
 
 <script src="js/bootstrap.js"></script>
-<script src="js/scuba_calculator.js"></script>
-<script src="js/addingForms.js"></script>
-<script src="js/messageFormation.js"></script>
+<script src="js/scubaCalculator.js"></script>
+<script src="js/renderElement.js"></script>
+<script src="js/formMessage.js"></script>
 
 </body>
 </html>

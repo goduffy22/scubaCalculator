@@ -57,73 +57,6 @@ function addForm(formNumber){
         true); //3rd dive added but then refreshes straight away (tried bubbling and trickling
 }
 
-function getInputDive1() {
-    const list = document.getElementById("depthList1");
-    const depthLevel = parseInt(list.options[list.selectedIndex].value);
-    const time = parseInt(document.getElementById("diveTime1").value);
-    return [depthLevel, time];
-}
-
-function getInputDiveNum(i) {
-    const depthList = "depthList" + i;
-    const diveTime = "diveTime" + i;
-    const intervalHours = "intervalHours" + i;
-    const intervalMinutes = "intervalMinutes" + i;
-
-    const hours = parseInt(document.getElementById(intervalHours).value);
-    const minutes = parseInt(document.getElementById(intervalMinutes).value);
-    const intervalTime = hours * 60 + minutes;
-
-    const list = document.getElementById(depthList);
-    const depthLevel = parseInt(list.options[list.selectedIndex].value);
-    const time = parseInt(document.getElementById(diveTime).value);
-    return [intervalTime, depthLevel, time];
-}
-
-document.getElementById("calculate").onclick = function() {
-    noDecompLimit = false; //reset when recalculate TODO make reset button/function
-    let msg1 = formMessageDive1();
-    let className = "alert-success";
-    if (noDecompLimit){
-        className = "alert-danger";
-    }
-    else if (safetyStop1){
-        className = "alert-warning";
-    }
-
-    const html = '<div class="alert ' + className + ' mt-3" role="alert">' +
-                        msg1 +
-                '</div>';
-    addElement("infoDive", "div", "alertContainer1", html);
-
-    if (noDecompLimit){
-        return ;
-    }
-    className = "alert-success";
-
-
-    let msg2 = formMessageDiveNum(2);
-    if(noDecompLimit){
-        className = "alert-danger";
-    }
-    else if(safetyStop2){
-        className = "alert-warning";
-    }
-    const html2 = '<div class="alert ' + className + ' mt-3" role="alert">' +
-        msg2 +
-        '</div>';
-    addElement("infoDive", "div", "alertContainer2", html2);
-};
-
-function addElement(parentId, elementTag, elementId, html){
-    var p = document.getElementById(parentId);
-    var newElement = document.createElement(elementTag);
-    newElement.setAttribute("id", elementId);
-    newElement.innerHTML = html;
-    p.appendChild(newElement);
-    return false;
-}
-
 const add1 = document.getElementById("add1");
 
 add1.onclick = function(){
@@ -131,4 +64,58 @@ add1.onclick = function(){
     return false;
 };
 
+
+function getInputDive(i) {
+    const depthList = "depthList" + i;
+    const diveTime = "diveTime" + i;
+    const list = document.getElementById(depthList);
+    const depthLevel = parseInt(list.options[list.selectedIndex].value);
+    const time = parseInt(document.getElementById(diveTime).value);
+
+    if (i === 1){
+        return [depthLevel, time];
+    } else {
+        const intervalHours = "intervalHours" + i;
+        const intervalMinutes = "intervalMinutes" + i;
+        const hours = parseInt(document.getElementById(intervalHours).value);
+        const minutes = parseInt(document.getElementById(intervalMinutes).value);
+        const intervalTime = hours * 60 + minutes;
+
+        return [intervalTime, depthLevel, time];
+    }
+}
+
+
+function renderAlert(i, previousGroup){
+    let className = "alert-success";
+    let props = formMessageDiveNum(i, previousGroup);
+    let msg = props[0]; //Could enter them directly rather than using space to create vars
+    let group = props[1];
+    let safetyStop = props[2];
+    if(group === null){
+        className = "alert-danger";
+    }
+    else if (safetyStop){
+        className = "alert-warning";
+    }
+    const html = '<div class="alert ' + className + ' mt-3" role="alert">' +
+        msg +
+        '</div>';
+    addElement("infoDive", "div", ("alertContainer" + i), html);
+
+    return group;
+}
+
+function addElement(parentId, elementTag, elementId, html){
+    const p = document.getElementById(parentId);
+    const newElement = document.createElement(elementTag);
+    newElement.setAttribute("id", elementId);
+    newElement.innerHTML = html;
+    p.appendChild(newElement);
+}
+
+document.getElementById("calculate").onclick = function() {
+    const group =  renderAlert(1, null);
+    renderAlert(2, group);
+};
 

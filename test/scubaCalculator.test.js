@@ -28,8 +28,11 @@ describe('scuba_calculator', function(){
         it('should return null', function(){
             assert.equal(findPressureGroup(0,205), null);
         });
-        it('should return 8', function(){
-
+        it('should return null', function(){
+            assert.equal(findPressureGroup(1, 130), null)
+        });
+        it('should return null', function(){
+            assert.equal(findPressureGroup(9, 14), null)
         });
     });
 
@@ -72,6 +75,9 @@ describe('scuba_calculator', function(){
         });
         it('should be true', function(){
             assert.equal(safetyStopCheck(21, 3), true);
+        });
+        it('should be true', function(){
+            assert.equal(safetyStopCheck(null, 8), false);
         });
     });
 
