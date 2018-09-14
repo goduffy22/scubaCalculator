@@ -1,7 +1,16 @@
 //TODO Redo this using React.js: Good demo for why React is so useful though!
 
+var diveCount = 1; //The only global variable, different way?
+addEvent(1);
+
 function addForm(formNumber){
     let html =
+        '<div class="card">' +
+         '<div class="card-header">' +
+               '<h4 class="my-0 font-weight-normal">Dive ' + formNumber + '</h4>' +
+             '</div>' +
+               '<div class="card-body">' +
+                 '<form id="form' + formNumber + '">' +
         '<label for="intervalHours' + formNumber + '">Surface Interval Time:</label>' +
 '<div class="input-group mb-3">' +
         '<select class="custom-select" id="intervalHours' + formNumber + '">' +
@@ -44,25 +53,49 @@ function addForm(formNumber){
         '</div>' +
         '<button type="button" class="btn btn-outline-dark" id="' +
                 'add' + formNumber +
-        '">Add next Dive</button> ' ;
-    addElement("form" + formNumber, "div", "dive" + formNumber, html);
+        '">Add next Dive</button>' +
+        '<button id="remove' + formNumber + '" class="mt-auto btn btn-outline-danger addForm " type="button">Remove Dive</button>' +
+        '</form>' +
+        '</div>' +
+        '</div>' ;
+    addElement("diveContainer" + formNumber, "div", "dive" + formNumber, html);
 
-    //Add button to add the next form
-    let btnName = "add" + formNumber;
-    let add = document.getElementById(btnName);
+    addEvent(formNumber);
 
-    add.onclick = function() {
-        addForm(formNumber + 1);
-        document.getElementById("add" + formNumber).onclick = null;
+    removeEvent(formNumber);
+
+
+    diveCount++;
+}
+
+
+function addEvent(i){
+    const add = document.getElementById("add" + i);
+    add.onclick = function(){
+        addForm(i + 1);
+        add.onclick = null;
     };
 }
 
-const add1 = document.getElementById("add1");
+function removeEvent(i){
+    let removeName = "remove" + i;
+    let remove = document.getElementById(removeName);
 
-add1.onclick = function(){
-    addForm(2);
-    document.getElementById("add1").onclick = null;
-};
+    remove.onclick = function() {
+        let j = i;
+        while (j <= diveCount){
+            removeElement("dive" + j);
+            j++;
+        }
+        diveCount = i - 1;
+        addEvent(diveCount);
+
+    };
+}
+
+
+
+
 
 
 function getInputDive(i) {
@@ -114,6 +147,11 @@ function addElement(parentId, elementTag, elementId, html){
     p.appendChild(newElement);
 }
 
+function removeElement(elementId) {
+    const element = document.getElementById(elementId);
+    element.parentNode.removeChild(element);
+}
+
 document.getElementById("calculate").onclick = function() {
     const infoDive = document.getElementById("infoDive");
     while (infoDive.firstChild) {
@@ -129,4 +167,6 @@ document.getElementById("calculate").onclick = function() {
 document.getElementById("resetAll").onclick = function() {
     window.location.reload();
 };
+
+
 
