@@ -114,7 +114,11 @@ function findRNT(newGroup, depthLevel){
     if (newGroup === null){
         RNT = 0;
     } else {
-        RNT = array[newGroup]; //TODO This needs a try/catch or check for within array
+        try {
+            RNT = array[newGroup];
+        } catch (e) {
+            RNT = null;
+        } //TODO This needs a try/catch or check for within array
     }
     return RNT;
 }

@@ -59,12 +59,9 @@ function addForm(formNumber){
         '</div>' +
         '</div>' ;
     addElement("diveContainer" + formNumber, "div", "dive" + formNumber, html);
-
     addEvent(formNumber);
-
     removeEvent(formNumber);
-
-
+    window.scrollTo(0,document.body.scrollHeight);
     diveCount++;
 }
 
@@ -152,17 +149,20 @@ function removeElement(elementId) {
     element.parentNode.removeChild(element);
 }
 
-document.getElementById("calculate").onclick = function() {
+document.getElementById("calculate").addEventListener("click", function() {
     const infoDive = document.getElementById("infoDive");
     while (infoDive.firstChild) {
         infoDive.removeChild(infoDive.firstChild);
     }
-    let group =  renderAlert(1, null); //TODO Make into loop  (could do for infinite element but better in react), sort out black box case
-    group = renderAlert(2, group);
-    group = renderAlert(3, group);
-    renderAlert(4, group);
 
-};
+    let group = null;
+
+    for (let i = 1; i <= diveCount; i++){
+        group =  renderAlert(i, group);
+    }
+
+    window.scrollTo(0, document.body.scrollHeight);
+});
 
 document.getElementById("resetAll").onclick = function() {
     window.location.reload();

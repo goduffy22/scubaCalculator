@@ -27,7 +27,7 @@ function formMessageDiveNum(i, previousGroup){
 
     if(group === null) {
         let maxTime = table1[depthLevel].slice(-1)[0];
-        msg += "DANGER! You have reached the no decompression limit.";
+        msg += "DANGER! You have reached the no decompression limit. <br>";
         if(diveTime - maxTime <= 5){
             msg += "You are less than 5 minutes over the limit, consider reducing the dive time. IF you go ahead with the dive" +
                 " you MUST do an 8 minute safety stop at 15 feet and have a surface interval time of " +
