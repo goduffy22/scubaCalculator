@@ -51,17 +51,17 @@ function addForm(formNumber){
     let btnName = "add" + formNumber;
     let add = document.getElementById(btnName);
 
-    add.addEventListener("click", function(){
+    add.onclick = function() {
         addForm(formNumber + 1);
-    },
-        true);
+        document.getElementById("add" + formNumber).onclick = null;
+    };
 }
 
 const add1 = document.getElementById("add1");
 
 add1.onclick = function(){
     addForm(2);
-    return false;
+    document.getElementById("add1").onclick = null;
 };
 
 
