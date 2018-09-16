@@ -22,7 +22,7 @@ function formMessageDiveNum(i, previousGroup){
 
     let group = findPressureGroup(depthLevel, diveTime + RNT);
 
-    let msg = 'Dive' + i + '<br>';
+    let msg = 'Dive ' + i + '<br>';
     let safetyStop = safetyStopCheck(group, depthLevel);
 
     if(group === null) {

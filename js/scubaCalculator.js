@@ -62,10 +62,10 @@ function findPressureGroup(depth, time){
     let group = null;
     if (time <= depthArray[0]){
         group = 0;
-    } else if(time > depthArray[(length - 2)]){
+    } else if (time > depthArray[(length - 1)]){
         group = null; //If group is null we have gone into noDecompressionLimit zone
     } else {
-        for(let i = 0; i < length-1; i++) {
+        for (let i = 0; i < length-1; i++) {
             if ((depthArray[i] < time) && (time <= depthArray[i + 1])) {
                 group = i + 1;
             }
@@ -82,7 +82,7 @@ function safetyStopCheck (group, depth){
         if (depth > 6){
             safetyStop = true;
         } else {
-            safetyStop = ((length - 4 <= group) && (group <= length - 2));
+            safetyStop = ((length - 4 <= group) && (group <= length - 1));
         }
     }
     return safetyStop;
