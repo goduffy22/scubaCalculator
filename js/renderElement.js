@@ -119,9 +119,12 @@ function getInputDive(i) {
 function renderAlert(i, previousGroup){
     let className = "alert-success";
     let props = formMessageDiveNum(i, previousGroup);
+
     let msg = props[0]; //Could enter them directly rather than using space to create vars
     let group = props[1];
     let safetyStop = props[2];
+    window.scrollTo(0, document.body.scrollHeight);
+
     if(group === null){
         className = "alert-danger";
     }
@@ -158,10 +161,21 @@ document.getElementById("calculate").addEventListener("click", function() {
     let group = null;
 
     for (let i = 1; i <= diveCount; i++){
-        group =  renderAlert(i, group);
+
+
+        try {
+            group = renderAlert(i, group);
+        } catch (e) {
+
+        } finally {
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+        //Try-finally needed in case that there are more than one dive
+            // and the previous group is null/no info entered in one of the dives. But doesn't scroll still. Why???
+
     }
 
-    window.scrollTo(0, document.body.scrollHeight);
+    window.scrollTo(0, document.body.scrollHeight); //Scrolls to dive info straight away
 });
 
 document.getElementById("resetAll").onclick = function() {

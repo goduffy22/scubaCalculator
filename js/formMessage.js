@@ -29,11 +29,12 @@ function formMessageDiveNum(i, previousGroup){
         let maxTime = table1[depthLevel].slice(-1)[0];
         msg += "DANGER! You have exceeded the no decompression limit. <br>";
         if ((diveTime + RNT - maxTime) <= 5){
-            msg += "You are less than 5 minutes over the limit. It is highly recommended that you reduce the dive time and/or max. depth of the dive. IF you go ahead with the dive" +
-                " you MUST do an 8 minute safety stop at 15 feet and have a surface interval time of " +
-                " at least 6 hours before your next dive.";
+            msg += "You are less than 5 minutes over the limit. It is highly recommended that you reduce the " +
+                "dive time and/or max. depth of the dive. IF you go ahead with the dive " +
+                "you MUST do an 8 minute safety stop at 15 feet and have a surface interval time of " +
+                "at least 6 hours before your next dive.";
         } else {
-            msg += "You are more than 5 minutes over the limit. It is strongly recommended that you reduce" +
+            msg += "You are more than 5 minutes over the limit. It is strongly recommended that you reduce " +
                 "your dive time or maximum depth and then recalculate. IF you go ahead with the dive " +
                 "you must take a 15 minute safety stop at 15 feet and don't dive for 24 hours after."
         }
